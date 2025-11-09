@@ -127,28 +127,43 @@ const rybbitSiteId = "db3613bd7287";
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
         if (!window.rybbit) return console.warn("⚠️ Rybbit ainda não carregado.");
+        const getUTMs = () => {
+          const params = new URLSearchParams(window.location.search);
+          const utms = {};
+          for (const [key, value] of params.entries()) {
+            if (key.startsWith("utm_") && value) {
+              utms[key] = value;
+              localStorage.setItem(key, value);
+            }
+          }
+          Object.keys(localStorage).forEach(key => {
+            if (key.startsWith("utm_") && !utms[key]) {
+              utms[key] = localStorage.getItem(key);
+            }
+          });
 
-        // Seleciona todos os elementos com atributo data-rybbit-event
-        const trackables = document.querySelectorAll("[data-rybbit-event]");
-
-        trackables.forEach((el) => {
+          return utms;
+        };
+        const globalContext = {
+          page_path: window.location.pathname,
+          page_title: document.title,
+          ...getUTMs(),
+        };
+        document.querySelectorAll("[data-rybbit-event]").forEach(el => {
           const eventName = el.getAttribute("data-rybbit-event");
           if (!eventName) return;
 
           el.addEventListener("click", () => {
-            // Cria objeto com todas as props que começam com data-rybbit-prop-
-            const props = {};
-            Array.from(el.attributes).forEach((attr) => {
+            const props = { ...globalContext };
+            for (const attr of el.attributes) {
               if (attr.name.startsWith("data-rybbit-prop-")) {
                 const propName = attr.name.replace("data-rybbit-prop-", "");
                 props[propName] = attr.value;
               }
-            });
+            }
 
-            // Dispara o evento no Rybbit
             try {
               window.rybbit.event(eventName, props);
-              console.log(`🎯 Evento Rybbit: ${eventName}`, props);
             } catch (err) {
               console.error("❌ Erro ao enviar evento Rybbit:", err);
             }
@@ -156,5 +171,6 @@ const rybbitSiteId = "db3613bd7287";
         });
       });
     </script>
+
   </body>
 </html>
