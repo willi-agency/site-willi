@@ -40,7 +40,6 @@ export const footerContent: FooterContent = {
         ]},
         { type: 'contact', items: [
           { label: config.company.contact.email.label, href: `mailto:${config.company.contact.email.label}`, icon: 'lucide:mail' },
-          { label: config.company.contact.phones.fixo.label, href: config.company.contact.phones.fixo.url, icon: 'lucide:phone' },
           { label: config.company.contact.phones.whatsapp.label, href: config.company.contact.phones.whatsapp.url, icon: 'lucide:phone' },
         ]}
       ]

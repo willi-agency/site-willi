@@ -4,73 +4,74 @@ export const API_KEY = "QSMI-exsIcubmkpKyVPcRrYlOH7zdSDQg5YDXhXfzRXkM32R8wot_VUI
 
 export const config = {
   company: {
-    name: "Quality SMI",
-    url: "https://qualitysmi.com.br",
-    logo: "https://qualitysmi.com.br/images/logo.png",
-    title: "Sistema de Marketing para Internet - Quality SMI",
-    description: "Criatividade, tecnologia e estratégia para transformar negócios. Descubra a Quality SMI, agência de SEO, Ads e social media com foco em performance.",
+    name: "Willi.agency",
+    url: "https://willi.agency",
+    logo: "https://willi.agency/images/logo.png",
+    title: "Willi.agency — Growth, Automação e Desenvolvimento de Alta Performance",
+    description:
+      "A Willi.agency combina automação avançada, growth marketing e desenvolvimento de alta performance para escalar seus resultados. Reduza custos, maximize lucros e aumente conversões.",
 
     contact: {
       phones: {
-        fixo: {
-          label: "(11) 5052-3371",
-          url: "tel:551150523371",
-        },
         whatsapp: {
-          label: "(11) 5052-3371",
-          url: "https://wa.me/551150523371",
-          share: "https://api.whatsapp.com/send?&text=Olá%2C%20gostaria%20de%20saber%20mais%20informações.",
+          label: "(11) 94626-6230",
+          url: "https://wa.me/5511946266230",
+          share:
+            "https://api.whatsapp.com/send?&text=Olá%2C%20gostaria%20de%20saber%20como%20a%20Willi.agency%20pode%20me%20ajudar%20a%20crescer.",
         },
       },
       email: {
-        label: "info@5mais.com.br",
-        url: "mailto:info@5mais.com.br",
-        share: "mailto:?subject=Veja%20isso!&body=Achei%20que%20você%20gostaria%20dessa%20página:%20https://", // trocar o final da url
+        label: "contato@willi.agency",
+        url: "mailto:contato@willi.agency",
+        share:
+          "mailto:?subject=Veja%20isso!&body=Descobri%20a%20Willi.agency%20—%20Growth%20e%20Automação%20Inteligente:%20https://willi.agency",
       },
       contactType: "customer service",
-      availableLanguage: ["Portuguese", "English"],
+      availableLanguage: ["Portuguese"],
     },
 
     address: {
-      street: "R. Santo Antônio Nº1189",
-      neighborhood: "Vila Galvão",
-      city: "Guarulhos",
+      street: "Av. Paulista, 1374",
+      neighborhood: "Bela Vista",
+      city: "São Paulo",
       region: "SP",
-      postalCode: "07071-000",
+      postalCode: "01310-100",
       country: "BR",
-      url: "",
+      url: "https://maps.google.com/?q=Av.+Paulista,+1374,+São+Paulo",
     },
 
     areaServed: {
-      name: "Brazil"
+      name: "Brazil",
     },
 
     social: {
       facebook: {
-        url: "https://facebook.com/5maisengenharia",
-        share: "https://www.facebook.com/sharer/sharer.php?u=https://5mais.com.br",
+        url: "https://facebook.com/willi.agency",
+        share:
+          "https://www.facebook.com/sharer/sharer.php?u=https://willi.agency",
         label: "Facebook",
       },
       instagram: {
-        url: "https://instagram.com/5maisengenharia",
+        url: "https://instagram.com/willi.agency",
         label: "Instagram",
       },
-      linkedin: "https://www.linkedin.com/company/5mais-engenharia/?viewAsMember=true",
+      linkedin: "https://www.linkedin.com/company/willi-agency/",
       twitter: {
-        url: "",
-        share: "https://twitter.com/intent/tweet?url=https://",
+        url: "https://twitter.com/willi_agency",
+        share: "https://twitter.com/intent/tweet?url=https://willi.agency",
         label: "Twitter",
       },
-      youtube: "https://www.youtube.com/channel/UCYODxAvV3QlJu0rrJg1m1MQ",
+      youtube: "https://www.youtube.com/@williagency",
     },
   },
 
   meta: {
-    author: "Quality SMI",
-    copyright: "© 2025 Quality SMI",
-    robots: "index, follow",
+    author: "Willi.agency",
+    copyright: "© 2025 Willi.agency",
+    robots: "noindex, nofollow",
     canonical: "https://willi.agency",
-    keywords: "tecnologia, inovação, automação, AI",
+    keywords:
+      "growth marketing, automação, desenvolvimento web, SEO, performance, AI, agência digital, geração de leads",
     geo: {
       region: "BR-SP",
       placename: "São Paulo",
@@ -78,9 +79,11 @@ export const config = {
     },
     social: {
       type: "website",
-      image: "/images/image.jpg",
-      title: "Título para Redes Sociais",
-      description: "Descrição otimizada para Facebook e LinkedIn.",
+      image: "https://willi.agency/images/cover.jpg",
+      title: "Willi.agency — Growth, Automação e Desenvolvimento de Alta Performance",
+      description:
+        "Reduza custos operacionais, maximize lucros e aumente conversões com a Willi.agency. Especialistas em Growth, Automação e SEO.",
     },
-  }
+  },
 };
+
