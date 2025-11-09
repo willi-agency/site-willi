@@ -11,7 +11,6 @@ import {
 import Navbar from "@/components/section/Navbar.astro";
 import Footer from "@/components/section/Footer.astro";
 import Whatsapp from "@/components/section/Whatsapp.astro";
-import RybbitClient from "@/components/RybbitClient.astro";
 
 // Dados de JSON-LD centralizados
 const jsonLdData = {
@@ -110,7 +109,15 @@ const getAbsolute = (url: string) =>
     }
   </head>
   <body class="antialiased bg-body text-body">
-    <RybbitClient client:only="astro/client" />
+    <script type="module">
+      import rybbit from '@rybbit/js';
+
+      rybbit.init({
+        analyticsHost: 'https://analytics.willi.agency/api',
+        siteId: 'db3613bd7287',
+      });
+    </script>
+
     <Navbar />
     <main id="main-content" tabindex="-1">
       <slot />
