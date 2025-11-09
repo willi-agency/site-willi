@@ -126,16 +126,18 @@ const rybbitSiteId = "db3613bd7287";
     <!-- Carregue scripts globais apenas se absolutamente necessários para toda a aplicação! -->
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
-        if (!window.rybbit) return console.warn("⚠️ Rybbit ainda não carregado.");
+        // Função para coletar UTM
         const getUTMs = () => {
           const params = new URLSearchParams(window.location.search);
           const utms = {};
+
           for (const [key, value] of params.entries()) {
             if (key.startsWith("utm_") && value) {
               utms[key] = value;
               localStorage.setItem(key, value);
             }
           }
+
           Object.keys(localStorage).forEach(key => {
             if (key.startsWith("utm_") && !utms[key]) {
               utms[key] = localStorage.getItem(key);
@@ -144,27 +146,46 @@ const rybbitSiteId = "db3613bd7287";
 
           return utms;
         };
+
+        // Global context with page title and UTM params
         const globalContext = {
           page_title: document.title,
           ...getUTMs(),
         };
+
+        // Check Rybbit loading
+        const checkRybbitLoaded = () => {
+          if (!window.rybbit) {
+            console.warn("⚠️ Rybbit ainda não carregado.");
+            return false; // Not ready
+          }
+          return true; // Ready
+        };
+
+        if (!checkRybbitLoaded()) return; // Stop if Rybbit is not loaded
+
+        // Seleciona elementos com atributo data-rybbit-event
         document.querySelectorAll("[data-rybbit-event]").forEach(el => {
           const eventName = el.getAttribute("data-rybbit-event");
           if (!eventName) return;
 
           el.addEventListener("click", () => {
-            const props = { ...globalContext };
+            const props = { ...globalContext }; // Add UTM and page title
             for (const attr of el.attributes) {
               if (attr.name.startsWith("data-rybbit-prop-")) {
                 const propName = attr.name.replace("data-rybbit-prop-", "");
-                props[propName] = attr.value;
+                props[propName] = attr.value; // Collect data attributes
               }
             }
 
-            try {
-              window.rybbit.event(eventName, props);
-            } catch (err) {
-              console.error("❌ Erro ao enviar evento Rybbit:", err);
+            // Dispara o evento Rybbit
+            if (checkRybbitLoaded()) {
+              try {
+                window.rybbit.event(eventName, props);
+                console.log(`🎯 Evento Rybbit: ${eventName}`, props);
+              } catch (err) {
+                console.error("❌ Erro ao enviar evento Rybbit:", err);
+              }
             }
           });
         });
