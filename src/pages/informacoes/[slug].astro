@@ -18,19 +18,19 @@ import type { KeywordPage } from 'src/schemas/keywordPage';
 // Geração das rotas estáticas
 export async function getStaticPaths() {
   const res = await fetch(`${API_URL}/keyword/all/${API_KEY}`);
-  const allKeywords: KeywordPage[] = await res.json();
   if (!res.ok) {
     const errorHtml = await res.text();
     console.error('Erro ao buscar slugs:', res.status, errorHtml);
     throw new Error(`Erro ao buscar slugs: ${res.status}`);
   }
 
-  const data = await res.json();
+  const data: KeywordPage[] = await res.json();
 
   return data.map((item: { slug: string }) => ({
     params: { slug: item.slug },
   }));
 }
+
 
 // Busca do conteúdo individual
 const { slug } = Astro.params as { slug: string };
