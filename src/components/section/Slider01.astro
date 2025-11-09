@@ -1,0 +1,37 @@
+---
+import { slider01 } from "src/content/slider";
+import DefaultSlider from "@/components/slider/DefaultSlider.astro";
+import { sliderConfig } from "@/components/slider/sliderConfig";
+import { Icon } from 'astro-icon/components'
+---
+
+<DefaultSlider /> <!-- Aqui chamamos a configuração global -->
+
+<div class="relative w-full px-14 left-to-right">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {slider01.map((slide) => (
+        <div class="swiper-slide p-2">
+          <div class="bg-white shadow-md w-full rounded-lg p-4 flex flex-col items-center">
+            <img src={slide.image} alt={slide.title} class="w-full h-40 object-cover rounded-md" />
+            <h3 class="text-lg font-bold mt-2">{slide.title}</h3>
+            <p class="text-sm text-gray-600">{slide.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {sliderConfig.navigation && (
+        <div class="flex w-full justify-center items-center pt-4 gap-2">
+          <div class="custom-swiper-button-prev cursor-pointer rounded-lg hover:bg-gray-50 p-2">
+            <Icon class="text-4xl text-primary hover:text-main-700" name="lucide:arrow-left" />
+          </div>
+          <div class="custom-swiper-button-next cursor-pointer rounded-lg hover:bg-gray-50 p-2">
+            <Icon class="text-4xl text-primary hover:text-main-700" name="lucide:arrow-right" />
+          </div>
+        </div>
+      )}
+      
+    <div class="relative mt-3 h-8">{sliderConfig.navDots && <div class="swiper-pagination "></div>}</div>
+  </div>
+</div>

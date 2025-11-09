@@ -1,0 +1,40 @@
+---
+import type { HeroContent } from 'src/schemas/hero';
+import { heroContent } from 'src/content/hero';
+import { Icon } from 'astro-icon/components';
+import HeroVisual from './HeroVisual.astro';
+
+const { content = heroContent } = Astro.props as { content?: HeroContent };
+---
+
+<section class="w-full md:h-[80vh] mt-20 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 items-center">
+  <div class="flex flex-col gap-6 md:gap-10 items-center justify-start p-4">
+    <h1 class="w-full flex flex-col mt-6 md:mt-0">
+      {content.titleHighlights.map((str, i) => (
+        <span class={`display-5 font-bold ${i === 0 ? 'text-secondary' : 'text-primary'}`}>{str}</span>
+      ))}
+    </h1>
+    <h2 class="text-base md:text-xl font-bold text-secondary-500">{content.subtitle}</h2>
+    <div class="w-full flex flex-col gap-2 justify-start">
+      <span class="text-md font-bold font-geist text-red-500">{content.scarcity}</span>
+      {content.ctas.map((cta) => (
+        <button class={`flex flex-row items-center justify-center gap-2 ${cta.style === 'primary' ? 'btn-primary-solid btn-xl' : 'btn-primary-link btn-lg'}`}> {cta.label} {cta.icon && <Icon is:inline width={29} height={29} stroke-width={2.5} class="icon-strong" name={cta.icon} />}</button>
+      ))}
+    </div>
+    <div class="w-full flex gap-10 items-center justify-start">
+      {content.socialProof.map((proof) => (
+        <div class="flex flex-col">
+          <span class="text-2xl font-bold text-secondary-400">{proof.value}</span>
+          <span class="text-md text-secondary-400">{proof.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <HeroVisual
+    roi={content.roi}
+    analysis={content.analysis}
+    sales={content.sales}
+    chartBars={content.chartBars}
+  />
+</section>

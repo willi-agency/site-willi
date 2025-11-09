@@ -1,0 +1,488 @@
+---
+// Recebe keywordPage como prop
+interface Props {
+  keywordPage: {
+    keyword: string;
+  };
+}
+
+const { keywordPage } = Astro.props;
+import { config } from 'src/config/site';
+---
+<section>
+  <div class="w-full bg-white border-2 border-[#E0E0E0] rounded-xl mb-5">
+    <h2 class="flex items-center !font-medium !text-sm !text-[#23292E] !rounded-t-xl bg-[#F4F4F4] !m-0 py-5 pl-5">
+      Regiões de São Paulo que a {config.company.name} atende com {keywordPage.keyword}
+    </h2>
+    <ul
+      class="!flex !flex-row !flex-wrap !w-full !mb-2 !m-0 !pl-2 !list-none !p-0"
+    >
+      <li class="">
+        <button
+          data-target="regiao-central"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Região Central</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-zn"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Zona Norte</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-zo"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Zona Oeste</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-zs"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Zona Sul</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-zl"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Zona Leste</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="grande-sp"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Grande São Paulo</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="litoral-sp"
+          class="tab-btn-sp px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold hover:cursor-pointer"
+          >Litoral de São Paulo</button
+        >
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="regiao-central" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Aclimação
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Bela Vista
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Bom Retiro
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Brás</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cambuci</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Centro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Consolação
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Higienópolis
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Glicério</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Liberdade
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Luz</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pari</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            República
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Santa Cecília
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Santa Efigênia
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Buarque
+          </li>
+        </ul>
+      </div>
+      <div id="regiao-zn" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Brasilândia
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cachoeirinha
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Casa Verde
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Imirim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaçanã</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim São Paulo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Lauzane Paulista
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mandaqui</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tremembé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tucuruvi</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Guilherme
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Gustavo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Maria
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Medeiros
+          </li>
+        </ul>
+      </div>
+      <div id="regiao-zo" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Água Branca
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Bairro do Limão
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Barra Funda
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Alto da Lapa
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Alto de Pinheiros
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Butantã</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Freguesia do Ó
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaguaré</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaraguá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Bonfiglioli
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Lapa</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pacaembú</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Perdizes</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Perús</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Pinheiros
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pirituba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Raposo Tavares
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Rio Pequeno
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Domingos
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sumaré</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Leopoldina
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Sonia
+          </li>
+        </ul>
+      </div>
+      <div id="regiao-zs" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Aeroporto
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Água Funda
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Brooklin</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Campo Belo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Campo Grande
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Campo Limpo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Capão Redondo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cidade Ademar
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cidade Dutra
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cidade Jardim
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Grajaú</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Ibirapuera
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Interlagos
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ipiranga</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Itaim Bibi
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jabaquara
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Ângela
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim América
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Europa
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Paulista
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Paulistano
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim São Luiz
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jardins</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jockey Club
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            M'Boi Mirim
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Moema</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Morumbi</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Parelheiros
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pedreira</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sacomã</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Santo Amaro
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Saúde</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Socorro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Andrade
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Mariana
+          </li>
+        </ul>
+      </div>
+      <div id="regiao-zl" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Água Rasa
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Anália Franco
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Aricanduva
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Artur Alvim
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Belém</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cidade Patriarca
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Cidade Tiradentes
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Engenheiro Goulart
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Ermelino Matarazzo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Guaianazes
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Itaim Paulista
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itaquera</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Jardim Iguatemi
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            José Bonifácio
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mooca</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Parque do Carmo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Parque São Lucas
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Parque São Rafael
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Penha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Ponte Rasa
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Mateus
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Miguel Paulista
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Sapopemba
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tatuapé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Carrão
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Curuçá
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Esperança
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Formosa
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Matilde
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Vila Prudente
+          </li>
+        </ul>
+      </div>
+      <div id="grande-sp" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Caetano do Sul
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Bernardo do Campo
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Santo André
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Diadema</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Guarulhos
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Suzano</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Ribeirão Pires
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mauá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Embu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Embu Guaçú
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Embu das Artes
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Itapecerica da Serra
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Osasco</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barueri</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jandira</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cotia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itapevi</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Santana de Parnaíba
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caierias</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Franco da Rocha
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Taboão da Serra
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cajamar</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Arujá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Alphaville
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Mairiporã
+          </li>
+        </ul>
+      </div>
+      <div id="litoral-sp" class="tab-pane-sp hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bertioga</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cananéia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Caraguatatuba
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cubatão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guarujá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Ilha Comprida
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Iguape</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ilhabela</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itanhaém</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mongaguá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Riviera de São Lourenço
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santos</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Vicente
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            Praia Grande
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ubatuba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">
+            São Sebastião
+          </li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Peruíbe</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.tab-btn-sp');
+    const panes = document.querySelectorAll('.tab-pane-sp');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const targetPane = document.getElementById(targetId);
+
+        const isActive = targetPane && !targetPane.classList.contains('hidden');
+
+        // Fecha todas as panes
+        panes.forEach((pane) => pane.classList.add('hidden'));
+
+        if (!isActive) {
+          targetPane?.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>

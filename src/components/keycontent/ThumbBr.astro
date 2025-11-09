@@ -1,0 +1,567 @@
+---
+// Recebe keywordPage como prop
+interface Props {
+  keywordPage: {
+    keyword: string;
+  };
+}
+
+const { keywordPage } = Astro.props;
+import { config } from 'src/config/site';
+---
+<section>
+  <div class="w-full bg-white border-2 border-[#E0E0E0] rounded-xl mb-5">
+    <h2 class="flex items-center !font-medium !text-sm !text-[#23292E] !rounded-t-xl bg-[#F4F4F4] !m-0 py-5 pl-5">Regiões do Brasil que a {config.company.name} atende com {keywordPage.keyword}</h2>
+    <ul class="!flex !flex-row !flex-wrap !w-full !mb-4 !m-0 !pl-2 !list-none !p-0">
+      <li>
+        <button
+          data-target="regiao-rj"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">RJ</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-mg"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">MG</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-es"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">ES</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-pr"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">PR</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-sc"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">SC</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-rs"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">RS</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-pe"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">PE</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-ba"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">BA</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-ce"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">CE</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-go"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">GO / DF</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-ms"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">MS</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-mt"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">MT</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-am"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">AM</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-pi"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">PI</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-pa"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">PA</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-ma"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">MA</button
+        >
+      </li>
+      <li>
+        <button
+          data-target="regiao-al"
+          class="tab-btn px-2 py-1 rounded !border-none hover:text-[#23292E] !underline !text-sm !font-bold">AL</button
+        >
+      </li>
+    </ul>
+  
+    <div class="tab-content">
+      <div id="regiao-rj" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Rio de Janeiro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rio de Janeiro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Gonçalo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Duque de Caxias</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Nova Iguaçu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Niterói</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Belford Roxo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São João de Meriti</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campos dos Goytacazes</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Petrópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Volta Redonda</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Magé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itaboraí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mesquita</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Nova Friburgo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barra Mansa</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Macaé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cabo Frio</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Nilópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Teresópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Resende</li>
+        </ul>
+      </div>
+      <div id="regiao-mg" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Minas Gerais</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Belo Horizonte</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Uberlândia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Contagem</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Juiz de Fora</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Betim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Montes Claros</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ribeirão das Neves</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Uberaba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Governador Valadares</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ipatinga</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Luzia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sete Lagoas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Divinópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ibirité</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Poços de Caldas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Patos de Minas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Teófilo Otoni</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sabará</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pouso Alegre</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barbacena</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Varginha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Conselheiro Lafeiete</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Araguari</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itabira</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Passos</li>
+        </ul>
+      </div>
+      <div id="regiao-es" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Espírito Santo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Serra</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Vila Velha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cariacica</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Vitória</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cachoeiro de Itapemirim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Linhares</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Mateus</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Colatina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guarapari</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Aracruz</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Viana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Nova Venécia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barra de São Francisco</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Maria de Jetibá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Castelo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Marataízes</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Gabriel da Palha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Domingos Martins</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itapemirim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Afonso Cláudio</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Alegre</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Baixo Guandu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Conceição da Barra</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guaçuí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Iúna</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaguaré</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mimoso do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sooretama</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Anchieta</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pinheiros</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pedro Canário</li>
+        </ul>
+      </div>
+      <div id="regiao-pr" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Paraná</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Curitiba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Londrina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Maringá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ponta Grossa</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cascavel</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São José dos Pinhais</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Foz do Iguaçu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Colombo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guarapuava</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paranaguá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Araucária</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Toledo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Apucarana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pinhais</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campo Largo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Almirante Tamandaré</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Umuarama</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paranavaí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Piraquara</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cambé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sarandi</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Fazenda Rio Grande</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paranavaí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Francisco Beltrão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pato Branco</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cianorte</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Telêmaco Borba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Castro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rolândia</li>
+        </ul>
+      </div>
+      <div id="regiao-sc" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Santa Catarina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Joinville</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Florianópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Blumenau</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itajaí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São José</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Chapecó</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Criciúma</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaraguá do sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Lages</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Palhoça</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Balneário Camboriú</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Brusque</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tubarão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Bento do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caçador</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Concórdia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Camboriú</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Navegantes</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rio do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Araranguá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Gaspar</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Biguaçu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Indaial</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Mafra</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Canoinhas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itapema</li>
+        </ul>
+      </div>
+      <div id="regiao-rs" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Rio Grande do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Porto Alegre</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caxias do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pelotas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Canoas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Maria</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Gravataí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Viamão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Novo Hamburgo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Leopoldo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rio Grande</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Alvorada</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Passo Fundo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sapucaia do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Uruguaiana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Cruz do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cachoeirinha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bagé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bento Gonçalves</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Erechim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guaíba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cachoeira do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santana do Livramento</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Esteio</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ijuí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Alegrete</li>
+        </ul>
+      </div>
+      <div id="regiao-pe" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Pernambuco</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Recife</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jaboatão dos Guararapes</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Olinda</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caruaru</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Petrolina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paulista</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cabo de Santo Agostinho</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Camaragibe</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Garanhuns</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Vitória de Santo Antão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Igarassu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Lourenço da Mata</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Abreu e Lima</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Cruz do Capibaribe</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ipojuca</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Serra Talhada</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Araripina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Gravatá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Carpina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Goiana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Belo Jardim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Arcoverde</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ouricuri</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Escada</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pesqueira</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Surubim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Palmares</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bezerros</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Suape</li>
+        </ul>
+      </div>
+      <div id="regiao-ba" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado da Bahia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Salvador</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Feira de Santana</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Vitória da Conquista</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Camaçari</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itabuna</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Juazeiro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Lauro de Freitas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ilhéus</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jequié</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Teixeira de Freitas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Alagoinhas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barreiras</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Porto Seguro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Simões Filho</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paulo Afonso</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Eunápolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santo Antônio de Jesus</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Valença</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Candeias</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Guanambi</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jacobina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Serrinha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Senhor do Bonfim</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Dias d'Ávila</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Luís Eduardo Magalhães</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itapetinga</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Irecê</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campo Formoso</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Casa Nova</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Brumado</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bom Jesus da Lapa</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Conceição do Coité</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itamaraju</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itaberaba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cruz das Almas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ipirá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santo Amaro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Euclides da Cunha</li>
+        </ul>
+      </div>
+      <div id="regiao-ce" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Ceará</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Fortaleza</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caucacia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Juazeiro do Norte</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Maracanaú</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sobral</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Crato</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itapipoca</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Maranguape</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Iguatu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Quixadá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Canindé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pacajus</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Crateús</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Aquiraz</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pacatuba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Quixeramobim</li>
+        </ul>
+      </div>
+      <div id="regiao-go" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Goiás</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Goiânia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Aparecida de Goiânia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Anápolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rio Verde</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Luziânia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Águas Lindas de Goiás</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Valparaíso de Goiás</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Trindade</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Formosa</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Novo Gama</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itumbiara</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Senador Canedo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Catalão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Jataí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Planaltina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caldas Novas</li>
+        </ul>
+      </div>
+      <div id="regiao-ms" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Mato Grosso do Sul</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campo Grande</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Dourados</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Três Lagoas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Corumbá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ponta Porã</li>
+        </ul>
+      </div>
+      <div id="regiao-mt" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Mato Grosso</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cuiabá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Várzea Grande</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rondonópolis</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sinop</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tangará da Serra</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cáceres</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Sorriso</li>
+        </ul>
+      </div>
+      <div id="regiao-am" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Amazonas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Manaus</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Parintins</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itacoatiara</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Manacapuru</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Coari</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Centro Amazonense</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tabatinga</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Maués</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Tefé</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Manicoré</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Humaitá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Iranduba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Lábrea</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Gabriel da Cachoeira</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Benjamin Constant</li>
+        </ul>
+      </div>
+      <div id="regiao-pi" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Piauí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Teresina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Raimundo Nonato</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Parnaíba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Picos</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Uruçuí</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Floriano</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Piripiri</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campo Maior</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barras</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">União</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Altos</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Esperantina</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">José de Freitas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pedro II</li>
+        </ul>
+      </div>
+      <div id="regiao-pa" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Pará</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Belém</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Ananindeua</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santarém</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Marabá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Castanhal</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Parauapebas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Itaituba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Cametá</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bragança</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Abaetetuba</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bragança</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Marituba</li>
+        </ul>
+      </div>
+      <div id="regiao-ma" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado do Maranhão</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Luís</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Imperatriz</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São José de Ribamar</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Timon</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Caxias</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Codó</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Paço do Lumiar</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Açailândia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Bacabal</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Balsas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Barra do Corda</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Inês</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Pinheiro</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Chapadinha</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Santa Luzia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Buriticupu</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Grajaú</li>
+        </ul>
+      </div>
+      <div id="regiao-al" class="tab-pane hidden">
+        <ul class="flex flex-row flex-wrap">
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Estado de Alagoas</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Maceió</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Arapiraca</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Rio Largo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Palmeira dos Índios</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">União dos Palmares</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Penedo</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">São Miguel dos Campos</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Coruripe</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Campo Alegre</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Delmiro Gouveia</li>
+          <li class="ml-3 pr-2 text-[#5C5C5C] font-medium text-sm">Marechal Deodoro</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panes = document.querySelectorAll('.tab-pane');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const targetPane = document.getElementById(targetId);
+
+        const isActive = targetPane && !targetPane.classList.contains('hidden');
+
+        // Fecha todas as panes
+        panes.forEach((pane) => pane.classList.add('hidden'));
+
+        if (!isActive) {
+          targetPane.classList.remove('hidden');
+        }
+      });
+    });
+  });
+</script>

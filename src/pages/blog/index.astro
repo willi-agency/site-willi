@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { API_URL, API_KEY } from "../../config/site";
+
+type Article = {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  createdAt: string;
+  image?: string;
+};
+
+const url = `${API_URL}/blog/articles/all/${API_KEY}`;
+let articles: Article[] = [];
+
+try {
+  const res = await fetch(url);
+  if (res.ok) {
+    articles = await res.json();
+  }
+} catch (err) {
+  console.error("Erro ao buscar os artigos", err);
+}
+---
+<Layout
+  title="Últimos artigos do blog"
+  description="Confira os últimos conteúdos publicados pela nossa equipe."
+  jsonLdItems={["website", "organization"]}>
+  <section class="max-w-7xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6 w-full text-center">Últimos artigos</h1>
+    <div class="grid gap-6 md:grid-cols-2">
+      {articles.length > 0 ? (
+        articles.map((article) => (
+          <a
+            href={`/blog/${article.slug}`}
+            class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition"
+          >
+            {article.image && (
+              <img
+                src={article.image}
+                alt={article.title}
+                class="w-full h-48 object-cover rounded-xl mb-4"
+              />
+            )}
+            <h2 class="text-xl font-semibold mb-2">{article.title}</h2>
+            <p class="text-gray-600 text-sm">
+              {article.description || "Leia mais..."}
+            </p>
+            <p class="mt-3 text-xs text-gray-400">
+              Publicado em{" "}
+              {new Date(article.createdAt).toLocaleDateString("pt-BR")}
+            </p>
+          </a>
+        ))
+      ) : (
+        <p class="text-gray-600 w-full text-center col-span-2">
+          Nenhum artigo encontrado
+        </p>
+      )}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,91 @@
+---
+// src/pages/informacoes/index.astro
+
+import Layout from '../../layouts/Layout.astro';
+import { config } from 'src/config/site';
+import { API_URL, API_KEY } from 'src/config/site';
+
+type Keyword = {
+  id: string;
+  keyword: string;
+  slug: string;
+  description: string | null;
+  content: string | null;
+  rawContent: string | null;
+  enterpriseId: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+};
+
+const url = `${API_URL}/keyword/all/${API_KEY}`;
+let keyword: Keyword[] = [];
+
+try {
+  const res = await fetch(url);
+  console.log(url);
+  if (res.ok) {
+    keyword = await res.json();
+  }
+} catch (err) {
+  console.error('Erro ao buscar os artigos', err);
+}
+---
+
+<Layout
+  title={`Informações - ${config.company.name}`}
+  description="Lista de palavras-chave estratégicas"
+  jsonLdItems={['website', 'organization']}
+>
+  <section class="max-w-7xl mx-auto px-4 py-10 mt-20">
+    <div
+      class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"
+    >
+      <h2 class="hidden">a</h2>
+      {
+        keyword.length > 0 ? (
+          keyword.map((kw: Keyword) =>
+            kw.content ? (
+              <a
+                href={`/informacoes/${kw.slug}`}
+                class="bg-white p-5 rounded-2xl shadow hover:shadow-lg transition flex flex-col items-center justify-center"
+              >
+                <img
+                  src={`/images/palavras/${kw.slug}/${kw.slug}.jpg`}
+                  alt={config.company.name}
+                  class="!m-0 !rounded-none min-h-[254px]"
+                />
+                <p class="text-gray-600 text-sm line-clamp-2 text-center">
+                  <strong>{kw.keyword}</strong>
+                </p>
+                <p class="text-gray-600 text-sm line-clamp-2">
+                  {kw.description ?? ''}
+                </p>
+                <p class="mt-3 text-xs text-gray-400">
+                  Criado em {new Date(kw.createdAt).toLocaleDateString('pt-BR')}
+                </p>
+              </a>
+            ) : (
+              <div
+                class="bg-white p-5 rounded-2xl shadow"
+                title="Sem conteúdo disponível"
+              >
+                <h2 class="text-xl font-semibold mb-2">{kw.keyword}</h2>
+                <p class="text-gray-600 text-sm line-clamp-2">
+                  {kw.description ?? ''}
+                </p>
+                <p class="mt-3 text-xs text-gray-400">
+                  Criado em {new Date(kw.createdAt).toLocaleDateString('pt-BR')}
+                </p>
+              </div>
+            ),
+          )
+        ) : (
+          <p class="text-center text-gray-600 w-full col-span-4">
+            Nenhuma informação encontrada
+          </p>
+        )
+      }
+    </div>
+  </section>
+</Layout>

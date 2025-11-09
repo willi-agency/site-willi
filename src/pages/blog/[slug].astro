@@ -1,0 +1,98 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { API_URL, API_KEY } from "../../config/site";
+import "../../styles/dinamicPage.css";
+import { generateJsonLdFromArticle } from "src/seo/jsonld/jsonLdFromArticle";
+import type { Article } from "src/schemas/article";
+import Navbar from "@/components/section/Navbar.astro";
+
+export async function getStaticPaths() {
+  const url = `${API_URL}/blog/articles/all/${API_KEY}`;
+  const res = await fetch(url);
+
+  if (!res.ok) {  
+    throw new Error(`Erro ao buscar slugs: ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  return data.map((item: { slug: string }) => ({
+    params: { slug: item.slug },
+  }));
+}
+
+const { slug } = Astro.params as { slug: string };
+let article: Article | null = null;
+
+try {
+  const res = await fetch(`${API_URL}/blog/articles/all/${API_KEY}/${slug}`);
+  if (!res.ok) throw new Error(`Erro ao buscar artigo com slug: ${slug}`);
+  article = await res.json();
+} catch (err) {
+  console.error("Erro ao buscar o artigo:", err);
+}
+---
+
+{
+  article ? (
+    <Layout
+      title={article.title}
+      description={article.description}
+      jsonLdCustom={[generateJsonLdFromArticle(article)]}
+    >
+      <Navbar />
+      <article class="max-w-7xl flex flex-col items-center mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          {article.image && (
+            <img
+              src={article.image}
+              alt={article.title}
+              class="w-full min-h-80 object-cover rounded-xl mb-6"
+            />
+          )}
+          <div class="flex flex-col w-full p-4">
+            <span class="px-2 py-1 rounded-full bg-primary text-white w-fit text-xs">
+              {article.category?.name}
+            </span>
+            <h1 class="text-3xl font-bold mb-4">{article.title}</h1>
+            <p class="text-sm text-gray-500 mb-6">
+              Publicado em{" "}
+              {new Date(article.createdAt).toLocaleDateString("pt-BR")}
+              {article.author && ` por ${article.author.name}`}
+            </p>
+            {article.tags?.length ? (
+              <div class="flex flex-wrap items-center gap-2 mt-2">
+                <span class="text-sm font-semibold text-gray-700">Tags:</span>
+                {article.tags.map((tag) => (
+                  <a
+                    href={`/blog/tags/${tag.slug}`}
+                    class="text-xs bg-primary text-white px-3 py-1 rounded-full hover:opacity-90 transition"
+                  >
+                    {tag.name}
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        <div class="max-w-4xl prose prose-lg article-content">
+          <Fragment set:html={article.content} />
+        </div>
+      </article>
+    </Layout>
+  ) : (
+    <Layout
+      title="Artigo não encontrado"
+      description="O artigo solicitado não foi encontrado."
+      jsonLdItems={["website"]}
+    >
+      <section class="max-w-4xl mx-auto px-4 py-20 text-center">
+        <h1 class="text-3xl font-bold mb-4">Artigo não encontrado</h1>
+        <p class="text-gray-600">
+          O conteúdo que você tentou acessar não existe ou foi removido.
+        </p>
+      </section>
+    </Layout>
+  )
+}

@@ -1,0 +1,50 @@
+---
+// PreviousNext.astro
+import { Icon } from 'astro-icon/components';
+import type { KeywordPage } from 'src/schemas/keywordPage';
+
+
+interface Props {
+  previousKeyword: KeywordPage | null;
+  nextKeyword: KeywordPage | null;
+}
+
+const { previousKeyword, nextKeyword } = Astro.props;
+---
+<div class="grid grid-cols-2 items-start gap-4 w-full max-w-4xl mx-auto mt-6">
+  <div class="md:col-span-1 text-left">
+    {previousKeyword && (
+      <>
+        <a
+          href={`/informacoes/${previousKeyword.slug}`}
+          title={previousKeyword.keyword}
+          rel="prev"
+          class="flex items-center !no-underline !text-primary uppercase !text-sm !font-normal"
+        >
+          <Icon name="lucide:chevron-left" class="w-4 h-4 mr-1 text-black" /> Anterior
+        </a>
+        <p class="!text-base !font-medium !text-[#171D32] capitalize">
+          {previousKeyword.keyword}
+        </p>
+      </>
+    )}
+  </div>
+
+  <div class="md:col-span-1 text-right">
+    {nextKeyword && (
+      <>
+        <a
+          href={`/informacoes/${nextKeyword.slug}`}
+          title={nextKeyword.keyword}
+          rel="next"
+          class="flex items-center justify-end !no-underline !text-primary uppercase !text-sm !font-normal"
+        >
+          Próximo <Icon name="lucide:chevron-right" class="w-4 h-4 ml-1 text-black" />
+        </a>
+        <p class="!text-base !font-medium !text-[#171D32] capitalize">
+          {nextKeyword.keyword}
+        </p>
+      </>
+    )}
+  </div>
+</div>

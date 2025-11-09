@@ -1,0 +1,180 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { API_URL, API_KEY, config } from '../../config/site';
+import '../../styles/dinamicPage.css';
+import { generateJsonLdFromKeywordPage } from '@/data/jsonld/jsonLdKeywordPage';
+// Imports content
+import Share from '../../components/keycontent/Share.astro';
+import PreviousKeys from '../../components/keycontent/PreviousKeys.astro';
+import ThumbSp from '../../components/keycontent/ThumbSp.astro';
+import ThumbBr from '@/components/keycontent/ThumbBr.astro';
+import RandomKeys from '../../components/keycontent/RandomKeys.astro';
+// Imports sidebar
+import Search from '../../components/keycontent/Search.astro';
+import Articles from '../../components/keycontent/Articles.astro';
+import Form from '../../components/keycontent/Form.astro';
+import type { KeywordPage } from 'src/schemas/keywordPage';
+
+// Geração das rotas estáticas
+export async function getStaticPaths() {
+  const res = await fetch(`${API_URL}/keyword/all/${API_KEY}`);
+  const allKeywords: KeywordPage[] = await res.json();
+  if (!res.ok) {
+    const errorHtml = await res.text();
+    console.error('Erro ao buscar slugs:', res.status, errorHtml);
+    throw new Error(`Erro ao buscar slugs: ${res.status}`);
+  }
+
+  const data = await res.json();
+
+  return data.map((item: { slug: string }) => ({
+    params: { slug: item.slug },
+  }));
+}
+
+// Busca do conteúdo individual
+const { slug } = Astro.params as { slug: string };
+let keywordPage: KeywordPage | null = null;
+
+try {
+  const res = await fetch(`${API_URL}/keyword/all/${API_KEY}/${slug}`);
+  console.log(`URL de consulta: ${API_URL}/keyword/all/${API_KEY}/${slug}`);
+  console.log('Retorno da API: ', res);
+  if (!res.ok) throw new Error(`Erro ao buscar keywordPage com slug: ${slug}`);
+  keywordPage = await res.json();
+} catch (err) {
+  console.error('Erro ao buscar a keywordPage:', err);
+}
+
+const jsonLdCustom = keywordPage
+  ? [generateJsonLdFromKeywordPage(keywordPage)]
+  : [];
+
+// -----------------------------
+// Definir Previous / Next
+// -----------------------------
+// fetch keywords apenas uma vez
+const allKeywordsRes = await fetch(`${API_URL}/keyword/all/${API_KEY}`);
+const allKeywords: KeywordPage[] = await allKeywordsRes.json();
+
+let previousKeyword: KeywordPage | null = null;
+let nextKeyword: KeywordPage | null = null;
+let keywords: KeywordPage[] = [];
+
+if (keywordPage) {
+  // Garantir que slugs sejam iguais
+  const index = allKeywords.findIndex(k => k.slug.toLowerCase() === keywordPage!.slug.toLowerCase());
+
+  if (index !== -1) {
+    if (index > 0) previousKeyword = allKeywords[index - 1];
+    if (index < allKeywords.length - 1) nextKeyword = allKeywords[index + 1];
+
+    // Para RandomKeys: pegar todos menos o atual
+    keywords = allKeywords.filter(k => k.slug.toLowerCase() !== keywordPage!.slug.toLowerCase());
+  }
+}
+---
+
+{
+  keywordPage ? (
+    <Layout
+      title={keywordPage.title}
+      description={keywordPage.description}
+      jsonLdCustom={jsonLdCustom}
+    >
+      <article
+        class="max-w-7xl flex flex-col items-center mx-auto px-4 py-10 article-content"
+        id="pageContent"
+      >
+        <div class="border-t-8 border-t-primary w-3/4 flex flex-col justify-center items-center mt-20">
+          <h4 class="!font-medium !text-[10px] !text-white !uppercase !bg-primary p-2">
+            Informações
+          </h4>
+          <h1 class="!font-bold !text-4xl !text-[#171D32] !mt-1 !mb-1 !text-center">
+            {keywordPage.keyword}
+          </h1>
+          <ol class="list-none p-0 flex flex-row flex-wrap justify-center text-gray-600">
+            <li class="flex items-center">
+              <a
+                href="/"
+                class="!font-bold !text-sm !text-[#171D32] !no-underline hover:!text-primary"
+              >
+                Home
+              </a>
+              <span class="mx-2">/</span>
+            </li>
+            <li class="flex items-center">
+              <a
+                href="/informacoes"
+                class="!font-bold !text-sm !text-[#171D32] !no-underline hover:!text-primary"
+              >
+                Informações
+              </a>
+              <span class="mx-2">/</span>
+            </li>
+            <li
+              class="flex items-center text-gray-900 font-medium"
+              aria-current="page"
+            >
+              {keywordPage?.keyword}
+            </li>
+          </ol>
+          <p class="!font-bold !text-sm !text-[#171D32] !uppercase md:!text-left !text-center">
+            Escrito por:
+            <span class="!font-normal !text-[#9195A2] !capitalize">
+              {config.company.name}
+            </span>
+          </p>
+        </div>
+
+        <div class="flex flex-col w-full md:flex-row md:items-start gap-2 mt-10">
+          <div class="w-full prose prose-lg keywordPage-content">
+            <Fragment set:html={keywordPage.content} />
+            <Share slug={keywordPage.slug} />
+            <hr class="border-[#BDC4DD] my-10" />
+            <PreviousKeys previousKeyword={previousKeyword} nextKeyword={nextKeyword} />
+            <p class="text-xs text-[#656B7C] font-normal">
+              O texto acima "{keywordPage.title}" é de direito reservado. Sua
+              reprodução, parcial ou total, mesmo citando nossos links, é
+              proibida sem a autorização do autor. Plágio é crime e está
+              previsto no artigo 184 do Código Penal. – 
+              <a
+                href="https://www.planalto.gov.br/Ccivil_03/Leis/L9610.htm"
+                target="_blank"
+                rel="nofollow"
+                title="Planalto"
+                class="!text-[#656B7C]"
+              >
+                Lei n° 9.610-98 sobre direitos autorais
+              </a>
+              .
+            </p>
+            <hr class="border-[#BDC4DD] my-10" />
+            <ThumbSp keywordPage={keywordPage} />
+            <ThumbBr keywordPage={keywordPage} />
+            <RandomKeys keywords={keywords} />
+          </div>
+
+          <div class="w-full md:w-2/4 bg-[#E9E9E93D] py-5 px-2 md:px-8 rounded-lg">
+            <Search />
+            <Articles />
+            <Form keywordValue={keywordPage.keyword} />
+          </div>
+        </div>
+      </article>
+    </Layout>
+  ) : (
+    <Layout
+      title="Página não encontrada"
+      description="A keyword solicitada não foi encontrada."
+      jsonLdItems={['website']}
+    >
+      <section class="max-w-4xl mx-auto px-4 py-20 text-center">
+        <h1 class="text-3xl font-bold mb-4">Página não encontrada</h1>
+        <p class="text-gray-600">
+          O conteúdo que você tentou acessar não existe ou foi removido.
+        </p>
+      </section>
+    </Layout>
+  )
+}

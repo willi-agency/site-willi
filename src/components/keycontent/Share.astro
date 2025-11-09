@@ -1,0 +1,92 @@
+---
+import { Icon } from 'astro-icon/components';
+import { config } from 'src/config/site';
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props as Props;
+
+// Montar URLs de compartilhamento
+const facebookShareUrl = `${config.company.social.facebook.share}/${slug}`;
+const whatsappShareUrl = `${config.company.contact.phones.whatsapp.share}/${slug}`;
+const currentPageUrl = `${config.company.url}/informacoes/${slug}`;
+---
+
+<ul class="flex flex-row flex-wrap items-center gap-2 !list-none !p-0">
+  <li class="!m-0">
+    <p class="font-bold text-2xl text-[#222222] !m-auto">
+      Compartilhe <br />
+      <span class="font-normal text-lg text-[#656B7C]">
+        Gostou deste artigo? Compartilhe:
+      </span>
+    </p>
+  </li>
+
+  <li>
+    <a
+      class="text-xl"
+      href={facebookShareUrl}
+      target="_blank"
+      title="Facebook"
+    >
+      <Icon
+        class="bg-[#1877F21A] text-[#1877F2] rounded-full w-[50px] h-[50px] p-3 duration-200"
+        name="lucide:facebook"
+      />
+    </a>
+  </li>
+
+  <li>
+    <a
+      class="text-xl"
+      href={whatsappShareUrl}
+      target="_blank"
+      title="WhatsApp"
+    >
+      <Icon
+        class="bg-[#25D3661A] text-[#25D366] rounded-full w-[50px] h-[50px] p-3 duration-200"
+        name="lucide:smartphone"
+      />
+    </a>
+  </li>
+</ul>
+
+<div class="relative w-full max-w-xl mt-4">
+  <input
+    id="urlPage"
+    type="text"
+    value={currentPageUrl}
+    readonly
+    class="w-full pl-4 pr-10 py-2 border !border-[#BDC4DD] rounded-md outline-none text-sm text-[#8D9CA5]"
+  />
+  <button
+    type="button"
+    class="absolute right-2 top-1/2 -translate-y-1/2 text-black hover:text-gray-800 !border-none !hover:bg-white"
+    title="Copiar link"
+    id="copyButton"
+  >
+    <Icon
+      name="lucide:copy"
+      class="w-5 h-5 !text-black !hover:bg-transparent !hover:text-black !border-none !shadow-none"
+    />
+  </button>
+</div>
+
+<script is:inline>
+  const copyButton = document.getElementById('copyButton');
+  const input = document.getElementById('urlPage');
+
+  copyButton.addEventListener('click', () => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(input.value).then(() => {
+        alert('Link copiado!');
+      }).catch(err => console.error('Erro ao copiar:', err));
+    } else {
+      input.select();
+      document.execCommand('copy');
+      alert('Link copiado!');
+    }
+  });
+</script>

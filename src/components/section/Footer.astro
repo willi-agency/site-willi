@@ -1,0 +1,103 @@
+---
+import type { FooterContent } from 'src/schemas/footer';
+import { Icon } from 'astro-icon/components';
+import { footerContent } from 'src/content/footer';
+
+const { content = footerContent } = Astro.props as { content: FooterContent };
+---
+
+<footer class="bg-footer py-10 border-t border-gray-900/10">
+  <div class="w-full max-w-7xl mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      {content.sections.map((col) => (
+        <div class="flex flex-col gap-4">
+          {col.blocks.map((block) => (
+            <>
+              {block.type === 'logo' && (
+                <img src={block.src} alt={block.alt} class="h-10 mb-2" />
+              )}
+              {block.type === 'slogan' && (
+                <div class="text-xs text-gray-300 leading-tight mb-2">{block.text}</div>
+              )}
+              {block.type === 'partners' && (
+                <div class="flex gap-3 items-center mb-2">
+                  {block.items.map((p) => (
+                    <img src={p.src} alt={p.alt} class="h-6 w-auto" />
+                  ))}
+                </div>
+              )}
+              {block.type === 'title' && (
+                <div class="text-sm font-semibold text-primary uppercase mb-2">{block.text}</div>
+              )}
+              {block.type === 'links' && (
+                <ul class="flex flex-col gap-0.5">
+                  {block.items.map(link => (
+                    <li><a href={link.href} class="text-white hover:text-primary transition text-xs">{link.label}</a></li>
+                  ))}
+                </ul>
+              )}
+              {block.type === 'address' && (
+                <div class="text-xs text-gray-300 mb-1 whitespace-pre-line">{block.lines.join(', ')}</div>
+              )}
+              {block.type === 'contact' && (
+                <div>
+                  {block.items.map(c => (
+                    <a href={c.href} class="flex items-center gap-2 text-xs text-gray-300 mb-1">
+                      {c.icon && <Icon name={c.icon} class="text-lg" />}
+                      {c.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+              {block.type === 'social' && (
+                <div class="flex items-center gap-3 mt-1">
+                  {block.items.map(s => (
+                    <a href={s.href} class="text-xl" target="_blank" rel="noopener">
+                      <Icon name={s.icon} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    <div class="w-full mt-8 flex justify-center items-center">
+      {content.cta.map((block) => (
+        <>
+          {block.type === 'cta' && (
+            <div class="bg-white px-6 py-4 rounded-xl flex flex-col sm:flex-row gap-4 w-full max-w-2xl mx-auto">
+              <div class="text-secondary mb-2 font-bold text-base text-center sm:text-left">{block.headline}</div>
+              <form class="flex w-full gap-2" action="#" method="POST">
+                <input
+                  type="text"
+                  name="contact"
+                  placeholder={block.placeholder}
+                  class="rounded px-3 py-2 text-sm text-gray-900 bg-gray-100 border border-gray-300 w-full"
+                  required
+                />
+                <button type="submit" class="bg-primary rounded px-4 py-2 text-white font-semibold hover:bg-primary-700 transition">{block.button}</button>
+              </form>
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center py-4 text-xs text-gray-400 gap-2 max-w-7xl mx-auto px-4">
+      <div class="flex gap-2">
+        {content.legal.filter(l => l.type === 'copyright').map(l => l.text)}
+      </div>
+      <div class="flex gap-4">
+        {content.legal
+          .filter(l => l.type === 'links')
+          .flatMap(l => l.items)
+          .map(link => (
+            <a href={link.href} class="text-gray-300 hover:text-primary transition">{link.label}</a>
+          ))}
+      </div>
+    </div>
+  </div>
+</footer>

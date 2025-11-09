@@ -1,0 +1,124 @@
+---
+import { Icon } from 'astro-icon/components';
+import { API_URL, API_KEY } from 'src/config/site';
+
+type Keyword = {
+  id: string;
+  keyword: string;
+  slug: string;
+  description: string | null;
+  content: string | null;
+  rawContent: string | null;
+  enterpriseId: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+};
+
+const url = `${API_URL}/keyword/all/${API_KEY}`;
+let keyword: Keyword[] = [];
+
+try {
+  const res = await fetch(url);
+  console.log(url);
+  if (res.ok) {
+    keyword = await res.json();
+  }
+} catch (err) {
+  console.error('Erro ao buscar os artigos', err);
+}
+---
+
+<div>
+  <h4 class="mb-2 !text-base !font-medium !text-[#171D32]">Buscar</h4>
+  <div class="relative w-full mb-2">
+    <Icon
+      name="lucide:search"
+      class="absolute right-3 top-3 text-gray-400 text-lg"
+    />
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar"
+      class="mb-2.5 w-full border border-gray-300 rounded-md pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+    />
+  </div>
+
+  <p id="resultCount" class="!font-medium !text-sm !text-[#4F5F82]"></p>
+  <h4 class="!text-base !font-medium !text-[#171D32]">Lista de Palavras-chave</h4>
+  <ul id="itemList" class="mb-2 text-base font-medium text-[#171D32] !list-none !p-0 !pl-2 h-[40vh] overflow-y-scroll">
+    {
+      keyword.length > 0 ? (
+        keyword.map((kw: Keyword) =>
+          kw.content ? (
+            <li class="item">
+              <a
+                href={`/informacoes/${kw.slug}`}
+                class="!text-gray-600 hover:!text-primary !no-underline hover:!underline"
+              >
+                {kw.keyword}
+              </a>
+            </li>
+          ) : (
+            <li class="item">{kw.keyword}</li>
+          ),
+        )
+      ) : (
+        <p class="text-center text-gray-600 w-full col-span-2">
+          Nenhuma informação encontrada
+        </p>
+      )
+    }
+  </ul>
+</div>
+
+<script is:inline>
+  const input = document.getElementById('searchInput');
+  const resultCount = document.getElementById('resultCount');
+  const listItems = document.querySelectorAll('#itemList .item');
+
+  input.addEventListener('input', function() {
+    const query = this.value.trim().toLowerCase();
+    let matchCount = 0;
+
+    listItems.forEach(function(item) {
+      const text = item.textContent.toLowerCase();
+      if (text.includes(query)) {
+        item.style.display = '';
+        matchCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    if (query.length > 0) {
+      if (matchCount > 0) {
+        resultCount.textContent = `${matchCount} resultado${matchCount > 1 ? 's' : ''} encontrado${matchCount > 1 ? 's' : ''}.`;
+      } else {
+        resultCount.textContent = 'Nenhum resultado encontrado.';
+      }
+    } else {
+      resultCount.textContent = '';
+    }
+  });
+</script>
+
+<style>
+  /* Scrollbar para navegadores com Webkit (Chrome, Edge, Safari) */
+  #itemList::-webkit-scrollbar {
+    width: 8px;
+  }
+  #itemList::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #itemList::-webkit-scrollbar-thumb {
+    background-color: #0d396f; /* Vermelho */
+    border-radius: 4px;
+  }
+
+  /* Firefox */
+  #itemList {
+    scrollbar-width: thin;
+    scrollbar-color: #0d396f transparent;
+  }
+</style>
