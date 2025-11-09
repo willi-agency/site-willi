@@ -109,14 +109,7 @@ const getAbsolute = (url: string) =>
     }
   </head>
   <body class="antialiased bg-body text-body">
-    <script type="module">
-      import rybbit from '@rybbit/js';
-
-      rybbit.init({
-        analyticsHost: 'https://analytics.willi.agency/api',
-        siteId: 'db3613bd7287',
-      });
-    </script>
+    <script type="module" src="/scripts/rybbit.js"></script>
 
     <Navbar />
     <main id="main-content" tabindex="-1">
