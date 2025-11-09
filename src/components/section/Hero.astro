@@ -18,7 +18,14 @@ const { content = heroContent } = Astro.props as { content?: HeroContent };
     <div class="w-full flex flex-col gap-2 justify-start">
       <span class="text-md font-bold font-geist text-red-500">{content.scarcity}</span>
       {content.ctas.map((cta) => (
-        <button class={`flex flex-row items-center justify-center gap-2 ${cta.style === 'primary' ? 'btn-primary-solid btn-xl' : 'btn-primary-link btn-lg'}`}> {cta.label} {cta.icon && <Icon is:inline width={29} height={29} stroke-width={2.5} class="icon-strong" name={cta.icon} />}</button>
+        <button
+          data-rybbit-event="cta-hero"
+          data-rybbit-prop-item_id="primary-cta-hero"
+          class={`flex flex-row items-center justify-center gap-2 ${cta.style === 'primary' 
+          ? 'btn-primary-solid btn-xl' 
+          : 'btn-primary-link btn-lg'}`}> 
+          {cta.label} {cta.icon && <Icon is:inline width={29} height={29} stroke-width={2.5} class="icon-strong" name={cta.icon} />}
+        </button>
       ))}
     </div>
     <div class="w-full flex gap-10 items-center justify-start">

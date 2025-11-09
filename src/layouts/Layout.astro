@@ -11,6 +11,12 @@ import {
 import Navbar from "@/components/section/Navbar.astro";
 import Footer from "@/components/section/Footer.astro";
 import Whatsapp from "@/components/section/Whatsapp.astro";
+import rybbit from "@rybbit/js";
+
+await rybbit.init({
+  analyticsHost: "https://analytics.willi.agency/api",
+  siteId: "db3613bd7287",
+});
 
 // Dados de JSON-LD centralizados
 const jsonLdData = {
