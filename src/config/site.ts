@@ -8,8 +8,7 @@ export const config = {
     url: "https://willi.agency",
     logo: "https://willi.agency/images/logo.png",
     title: "Willi.agency — Growth, Automação e Desenvolvimento de Alta Performance",
-    description:
-      "A Willi.agency combina automação avançada, growth marketing e desenvolvimento de alta performance para escalar seus resultados. Reduza custos, maximize lucros e aumente conversões.",
+    description: "A Willi combina automação avançada, growth marketing e desenvolvimento de alta performance para escalar seus resultados. Reduza custos, maximize lucros e aumente conversões.",
 
     contact: {
       phones: {
