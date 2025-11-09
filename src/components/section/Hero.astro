@@ -44,4 +44,12 @@ const { content = heroContent } = Astro.props as { content?: HeroContent };
     sales={content.sales}
     chartBars={content.chartBars}
   />
+
+  <script is:inline>
+  document.getElementById('my-astro-button')?.addEventListener('click', () => {
+    if (window.rybbit) {
+      window.rybbit.event('astro_button_click', { source: 'MyButton.astro' });
+    }
+  });
+</script>
 </section>

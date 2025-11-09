@@ -50,6 +50,8 @@ const jsonLdContent = [
 // Função para garantir que URLs sejam absolutas
 const getAbsolute = (url: string) =>
   url.startsWith("http") ? url : `${config.meta.canonical.replace(/\/$/, "")}${url.startsWith("/") ? "" : "/"}${url}`;
+
+const rybbitSiteId = "db3613bd7287";
 ---
 
 <!doctype html>
@@ -100,6 +102,12 @@ const getAbsolute = (url: string) =>
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:creator" content={config.company.social?.twitter?.url || ""} />
+    <script is:inline
+      src="/scripts/rybbit.js"
+      data-site-id={rybbitSiteId}
+      async
+      defer
+    ></script>
 
     <!-- JSON-LD para SEO estruturado -->
     {
@@ -109,8 +117,6 @@ const getAbsolute = (url: string) =>
     }
   </head>
   <body class="antialiased bg-body text-body">
-    <script type="module" src="/scripts/rybbit.js"></script>
-
     <Navbar />
     <main id="main-content" tabindex="-1">
       <slot />
@@ -118,6 +124,37 @@ const getAbsolute = (url: string) =>
     <Whatsapp />
     <Footer />
     <!-- Carregue scripts globais apenas se absolutamente necessários para toda a aplicação! -->
-    <script type="module" src="/scripts/tracking.js"></script>
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!window.rybbit) return console.warn("⚠️ Rybbit ainda não carregado.");
+
+        // Seleciona todos os elementos com atributo data-rybbit-event
+        const trackables = document.querySelectorAll("[data-rybbit-event]");
+
+        trackables.forEach((el) => {
+          const eventName = el.getAttribute("data-rybbit-event");
+          if (!eventName) return;
+
+          el.addEventListener("click", () => {
+            // Cria objeto com todas as props que começam com data-rybbit-prop-
+            const props = {};
+            Array.from(el.attributes).forEach((attr) => {
+              if (attr.name.startsWith("data-rybbit-prop-")) {
+                const propName = attr.name.replace("data-rybbit-prop-", "");
+                props[propName] = attr.value;
+              }
+            });
+
+            // Dispara o evento no Rybbit
+            try {
+              window.rybbit.event(eventName, props);
+              console.log(`🎯 Evento Rybbit: ${eventName}`, props);
+            } catch (err) {
+              console.error("❌ Erro ao enviar evento Rybbit:", err);
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
