@@ -13,7 +13,9 @@
     var UTMTracker = class {
         constructor() {
             this.TRACKING_KEY = "rybbit-utm-data";
+            this.VISITOR_ID_KEY = "rybbit-visitor-id";
             this.EXPIRATION_DAYS = 30;
+            this.VISITOR_ID_EXPIRATION_DAYS = 730; // 2 anos
         }
 
         normalizeReferrer() {
@@ -35,7 +37,9 @@
         normalizeSource(params) {
             if (params.get("gclid")) return "google_ads";
             if (params.get("fbclid")) return "facebook_ads";
-            return params.get("utm_source")?.toLowerCase() || this.normalizeReferrer();
+            
+            const utmSource = params.get("utm_source")?.toLowerCase();
+            return utmSource || this.normalizeReferrer();
         }
 
         saveUTMData(data) {
@@ -66,46 +70,97 @@
         captureUTMParams() {
             const params = new URLSearchParams(window.location.search);
             const existing = this.getUTMData();
-            const utmData = {};
 
-            // Captura todos os parâmetros UTM
+            const utmData = {};
             for (const [key, value] of params.entries()) {
                 if (key.startsWith("utm_")) {
                     utmData[key] = value;
                 }
             }
 
-            // Monta dados completos
+            const mergedUTMs = { ...(existing || {}), ...utmData };
+
             const newData = {
-                ...utmData,
+                ...mergedUTMs,
                 gclid: params.get("gclid") || existing?.gclid || null,
                 fbclid: params.get("fbclid") || existing?.fbclid || null,
                 source: this.normalizeSource(params) || existing?.source || "direct",
-                referrer: document.referrer || "direct",
-                referrer_source: this.normalizeReferrer(),
                 firstVisit: existing?.firstVisit || new Date().toISOString(),
                 lastUpdated: new Date().toISOString(),
-                expiresAt: existing?.expiresAt,
             };
 
-            // Remove campos de controle para comparação
-            const { expiresAt: __, ...restExisting } = existing || {};
-            const { expiresAt: ____, ...restNew } = newData;
+            const { expiresAt: _e1, lastUpdated: _l1, firstVisit: _f1, ...restExisting } = existing || {};
+            const { expiresAt: _e2, lastUpdated: _l2, firstVisit: _f2, ...restNew } = newData;
 
-            // Salva apenas se houver mudanças
             if (!existing || JSON.stringify(restExisting) !== JSON.stringify(restNew)) {
                 this.saveUTMData(newData);
+            } else {
+                newData.expiresAt = existing?.expiresAt;
             }
 
             return newData;
         }
 
+        // 🆕 GERA ID ÚNICO DO NAVEGADOR
+        generateVisitorId() {
+            const timestamp = Date.now().toString(36);
+            const randomPart = Math.random().toString(36).substring(2, 15);
+            return `trk_${timestamp}_${randomPart}`;
+        }
+
+        // 🆕 OBTÉM OU CRIA VISITOR ID
+        getVisitorId() {
+            try {
+                const raw = localStorage.getItem(this.VISITOR_ID_KEY);
+                if (!raw) return this.createVisitorId();
+                
+                const data = JSON.parse(raw);
+                
+                // Verifica expiração
+                if (new Date(data.expiresAt) < new Date()) {
+                    localStorage.removeItem(this.VISITOR_ID_KEY);
+                    return this.createVisitorId();
+                }
+                
+                return data.visitorId;
+            } catch {
+                return this.createVisitorId();
+            }
+        }
+
+        // 🆕 CRIA E SALVA VISITOR ID
+        createVisitorId() {
+            try {
+                const visitorId = this.generateVisitorId();
+                const expiresAt = new Date(Date.now() + this.VISITOR_ID_EXPIRATION_DAYS * 24 * 60 * 60 * 1000).toISOString();
+                
+                localStorage.setItem(this.VISITOR_ID_KEY, JSON.stringify({
+                    visitorId,
+                    createdAt: new Date().toISOString(),
+                    expiresAt
+                }));
+                
+                return visitorId;
+            } catch (e) {
+                console.warn("Could not create visitor ID:", e);
+                // Fallback: ID temporário na sessão
+                return `trk_session_${Date.now()}`;
+            }
+        }
+
+        // 🆕 LIMPA VISITOR ID
+        clearVisitorId() {
+            try {
+                localStorage.removeItem(this.VISITOR_ID_KEY);
+            } catch {}
+        }
+
+        // ✅ SEM visitor_id automático
         enrichEventData(properties = {}) {
             const utmData = this.getUTMData();
-            if (!utmData) return properties;
 
-            // Remove campos de controle antes de adicionar aos eventos
-            const { expiresAt, lastUpdated, ...cleanUTMData } = utmData;
+            // Remove campos de controle interno
+            const { expiresAt, lastUpdated, firstVisit, ...cleanUTMData } = utmData || {};
             
             return {
                 ...cleanUTMData,
@@ -117,6 +172,12 @@
             try {
                 localStorage.removeItem(this.TRACKING_KEY);
             } catch {}
+        }
+
+        // 🆕 LIMPA TUDO (UTMs + Visitor ID)
+        clearAll() {
+            this.clearUTMData();
+            this.clearVisitorId();
         }
     };
     // ========== FIM: UTM TRACKING MANAGER ==========
