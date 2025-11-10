@@ -15,7 +15,7 @@
             this.TRACKING_KEY = "rybbit-utm-data";
             this.VISITOR_ID_KEY = "rybbit-visitor-id";
             this.EXPIRATION_DAYS = 30;
-            this.VISITOR_ID_EXPIRATION_DAYS = 730; // 2 anos
+            this.VISITOR_ID_EXPIRATION_DAYS = 730;
         }
 
         normalizeReferrer() {
@@ -71,6 +71,7 @@
             const params = new URLSearchParams(window.location.search);
             const existing = this.getUTMData();
 
+            // Captura apenas utm_* da URL
             const utmData = {};
             for (const [key, value] of params.entries()) {
                 if (key.startsWith("utm_")) {
@@ -78,37 +79,55 @@
                 }
             }
 
-            const mergedUTMs = { ...(existing || {}), ...utmData };
+            // 🔧 FIX: Filtra campos antigos do existing antes de mesclar
+            const existingUTMs = {};
+            if (existing) {
+                for (const [key, value] of Object.entries(existing)) {
+                    // Mantém apenas utm_*, gclid, fbclid, source (campos válidos)
+                    if (
+                        key.startsWith("utm_") || 
+                        key === "gclid" || 
+                        key === "fbclid" || 
+                        key === "source" ||
+                        key === "firstVisit" ||
+                        key === "lastUpdated" ||
+                        key === "expiresAt"
+                    ) {
+                        existingUTMs[key] = value;
+                    }
+                    // ❌ Ignora: referrer, referrer_source (campos antigos)
+                }
+            }
+
+            const mergedUTMs = { ...existingUTMs, ...utmData };
 
             const newData = {
                 ...mergedUTMs,
-                gclid: params.get("gclid") || existing?.gclid || null,
-                fbclid: params.get("fbclid") || existing?.fbclid || null,
-                source: this.normalizeSource(params) || existing?.source || "direct",
-                firstVisit: existing?.firstVisit || new Date().toISOString(),
+                gclid: params.get("gclid") || existingUTMs?.gclid || null,
+                fbclid: params.get("fbclid") || existingUTMs?.fbclid || null,
+                source: this.normalizeSource(params) || existingUTMs?.source || "direct",
+                firstVisit: existingUTMs?.firstVisit || new Date().toISOString(),
                 lastUpdated: new Date().toISOString(),
             };
 
-            const { expiresAt: _e1, lastUpdated: _l1, firstVisit: _f1, ...restExisting } = existing || {};
+            const { expiresAt: _e1, lastUpdated: _l1, firstVisit: _f1, ...restExisting } = existingUTMs || {};
             const { expiresAt: _e2, lastUpdated: _l2, firstVisit: _f2, ...restNew } = newData;
 
             if (!existing || JSON.stringify(restExisting) !== JSON.stringify(restNew)) {
                 this.saveUTMData(newData);
             } else {
-                newData.expiresAt = existing?.expiresAt;
+                newData.expiresAt = existingUTMs?.expiresAt;
             }
 
             return newData;
         }
 
-        // 🆕 GERA ID ÚNICO DO NAVEGADOR
         generateVisitorId() {
             const timestamp = Date.now().toString(36);
             const randomPart = Math.random().toString(36).substring(2, 15);
             return `trk_${timestamp}_${randomPart}`;
         }
 
-        // 🆕 OBTÉM OU CRIA VISITOR ID
         getVisitorId() {
             try {
                 const raw = localStorage.getItem(this.VISITOR_ID_KEY);
@@ -116,7 +135,6 @@
                 
                 const data = JSON.parse(raw);
                 
-                // Verifica expiração
                 if (new Date(data.expiresAt) < new Date()) {
                     localStorage.removeItem(this.VISITOR_ID_KEY);
                     return this.createVisitorId();
@@ -128,7 +146,6 @@
             }
         }
 
-        // 🆕 CRIA E SALVA VISITOR ID
         createVisitorId() {
             try {
                 const visitorId = this.generateVisitorId();
@@ -143,19 +160,16 @@
                 return visitorId;
             } catch (e) {
                 console.warn("Could not create visitor ID:", e);
-                // Fallback: ID temporário na sessão
                 return `trk_session_${Date.now()}`;
             }
         }
 
-        // 🆕 LIMPA VISITOR ID
         clearVisitorId() {
             try {
                 localStorage.removeItem(this.VISITOR_ID_KEY);
             } catch {}
         }
 
-        // ✅ SEM visitor_id automático
         enrichEventData(properties = {}) {
             const utmData = this.getUTMData();
 
@@ -164,7 +178,7 @@
             
             return {
                 ...cleanUTMData,
-                ...properties, // Propriedades do evento têm prioridade
+                ...properties,
             };
         }
 
@@ -174,7 +188,6 @@
             } catch {}
         }
 
-        // 🆕 LIMPA TUDO (UTMs + Visitor ID)
         clearAll() {
             this.clearUTMData();
             this.clearVisitorId();
