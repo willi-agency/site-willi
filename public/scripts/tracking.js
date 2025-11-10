@@ -1,13 +1,10 @@
-// /src/scripts/tracking.js
 const TRACKING_KEY = "tracking_data";
 const EXPIRATION_DAYS = 30;
 
-// Gera ID único
 function generateId() {
   return "trk_" + (crypto.randomUUID?.() || Math.random().toString(36).slice(2, 11) + Date.now());
 }
 
-// Normaliza o referrer
 function normalizeReferrer() {
   const ref = document.referrer || "";
   if (!ref) return "direct";
@@ -26,25 +23,18 @@ function normalizeReferrer() {
   }
 }
 
-// Determina a fonte principal: UTM > Ads > Referrer
 function normalizeSource(params) {
   if (params.get("gclid")) return "google_ads";
   if (params.get("fbclid")) return "facebook_ads";
-
-  const utmSource = params.get("utm_source")?.toLowerCase();
-  if (utmSource) return utmSource;
-
-  return normalizeReferrer();
+  return params.get("utm_source")?.toLowerCase() || normalizeReferrer();
 }
 
-// Salva no localStorage
 function saveTracking(data) {
   const expiresAt = data.expiresAt || new Date(Date.now() + EXPIRATION_DAYS * 24 * 60 * 60 * 1000).toISOString();
   localStorage.setItem(TRACKING_KEY, JSON.stringify({ ...data, expiresAt }));
   console.log("Tracking salvo:", { ...data, expiresAt });
 }
 
-// Recupera tracking válido
 function getTracking() {
   const raw = localStorage.getItem(TRACKING_KEY);
   if (!raw) return null;
@@ -61,20 +51,11 @@ function getTracking() {
   }
 }
 
-// Comparação simples de objetos (ignora ordem de chaves)
-function isEqual(a, b) {
-  return JSON.stringify(Object.entries(a).sort()) === JSON.stringify(Object.entries(b).sort());
-}
-
-// Inicialização do tracking
 function initTracking() {
   const params = new URLSearchParams(window.location.search);
   const existing = getTracking();
-
-  // Tracking ID nunca muda
   const trackingId = existing?.trackingId || generateId();
 
-  // Captura dinamicamente todas as UTM
   const utmData = {};
   for (const [key, value] of params.entries()) {
     if (key.startsWith("utm_")) {
@@ -95,16 +76,46 @@ function initTracking() {
     expiresAt: existing?.expiresAt,
   };
 
-  // Atualiza apenas se algum campo mudou (exceto trackingId)
   const { trackingId: _, expiresAt: __, ...restExisting } = existing || {};
   const { trackingId: ___, expiresAt: ____, ...restNew } = newData;
 
-  if (!existing || !isEqual(restExisting, restNew)) {
+  if (!existing || JSON.stringify(restExisting) !== JSON.stringify(restNew)) {
     saveTracking(newData);
   }
 
-  return newData;
+  // Inicializa eventos
+  document.querySelectorAll("[data-willi-event]").forEach(el => {
+    const eventName = el.getAttribute("data-willi-event");
+    if (!eventName) return;
+
+    el.addEventListener("click", (e) => {
+      const props = { ...newData }; // Inclui UTMs
+      for (const attr of el.attributes) {
+        if (attr.name.startsWith("data-willi-prop-")) {
+          const propName = attr.name.replace("data-willi-prop-", "");
+          props[propName] = attr.value; // Coleta atributos
+        }
+      }
+
+      // Função para enviar evento
+      const sendEvent = () => {
+        if (window.rybbit) {
+          try {
+            window.rybbit.event(eventName, props);
+            console.log(`🎯 Evento Rybbit: ${eventName}`, props);
+          } catch (err) {
+            console.error("❌ Erro ao enviar evento Rybbit:", err);
+          }
+        } else {
+          console.warn("⚠️ Rybbit ainda não carregado. Tentando novamente...");
+          setTimeout(sendEvent, 1000); // Tenta novamente após 1 segundo
+        }
+      };
+
+      sendEvent(); // Tenta enviar o evento
+    });
+  });
 }
 
-// Inicializa automaticamente ao carregar
+// Inicializa tracking imediatamente
 initTracking();

@@ -19,8 +19,9 @@ const { content = heroContent } = Astro.props as { content?: HeroContent };
       <span class="text-md font-bold font-geist text-red-500">{content.scarcity}</span>
       {content.ctas.map((cta) => (
         <button
-          data-rybbit-event="cta-hero"
-          data-rybbit-prop-item_id="primary-cta-hero"
+          data-rybbit-event="click-button"
+          data-rybbit-prop-item_id="cta-primary"
+          data-rybbit-prop-section_id="hero"
           class={`flex flex-row items-center justify-center gap-2 ${cta.style === 'primary' 
           ? 'btn-primary-solid btn-xl' 
           : 'btn-primary-link btn-lg'}`}> 
