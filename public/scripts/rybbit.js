@@ -95,7 +95,6 @@
                     ) {
                         existingUTMs[key] = value;
                     }
-                    // ❌ Ignora: referrer, referrer_source (campos antigos)
                 }
             }
 
@@ -171,15 +170,18 @@
         }
 
         enrichEventData(properties = {}) {
-            const utmData = this.getUTMData();
+          const utmData = this.getUTMData();
 
-            // Remove campos de controle interno
-            const { expiresAt, lastUpdated, firstVisit, ...cleanUTMData } = utmData || {};
-            
-            return {
-                ...cleanUTMData,
-                ...properties,
-            };
+          // Remove campos de controle interno
+          const { expiresAt, lastUpdated, firstVisit, ...cleanUTMData } = utmData || {};
+          
+          // 🔧 Remove referrer e referrer_source das properties
+          const { referrer, referrer_source, ...cleanProperties } = properties;
+          
+          return {
+              ...cleanUTMData,
+              ...cleanProperties,
+          };
         }
 
         clearUTMData() {
